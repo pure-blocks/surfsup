@@ -18,7 +18,7 @@ object Main extends ZIOAppDefault :
     ZLayer.make[WillyWeatherWindStatusService](
       WillyWeatherWindStatusService.live,
       HttpClientZioBackend.layer(),
-      ZLayer.succeed("ZjM0ZmY1Zjc5NDQ3N2IzNjE3MmRmYm"))
+      ZLayer.succeed(sys.env("WILLY_WEATHER_KEY")))
         .build
         .map(_.get[WillyWeatherWindStatusService])
         .flatMap(program(_))
