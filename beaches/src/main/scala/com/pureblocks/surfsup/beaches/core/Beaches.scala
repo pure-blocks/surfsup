@@ -3,19 +3,19 @@ package com.pureblocks.surfsup.beaches.core
 import com.pureblocks.surfsup.core.TIO
 import zio.{IO, ZIO, ZLayer}
 
-trait WindStatusService:
+trait WindStatusProvider:
   def get(beachId: BeachId): TIO[BeachNotFound, Wind]
 
-trait TidesStatusService:
+trait TidesStatusProvider:
   def get(beachId: BeachId): TIO[BeachNotFound, TideHeight]
 
-trait SwellStatusService:
+trait SwellStatusProvider:
   def get(beachId: BeachId): TIO[BeachNotFound, Swell]
 
-class BeachStatusService(
-                      windService: WindStatusService,
-                      tidesService: TidesStatusService,
-                      swellsService: SwellStatusService
+class BeachStatusProvider(
+                          windService: WindStatusProvider,
+                          tidesService: TidesStatusProvider,
+                          swellsService: SwellStatusProvider
                     ):
 
   def getStatus(beachId: BeachId): ZIO[Any, Throwable | BeachNotFound, Beach] =

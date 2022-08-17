@@ -1,6 +1,6 @@
 package com.pureblocks.surfsup.beaches.infrastructure
 
-import com.pureblocks.surfsup.beaches.core.{BeachId, BeachNotFound, WindStatusService}
+import com.pureblocks.surfsup.beaches.core.{BeachId, BeachNotFound, WindStatusProvider}
 import com.pureblocks.surfsup.core.{TIO, TechnicalError}
 import sttp.client3.*
 import sttp.client3.httpclient.zio.*
@@ -8,7 +8,7 @@ import zio.*
 import zio.{IO, *}
 import zio.json.*
 
-case class WillyWeatherWindStatusService(sttpBackend: SttpBackend[Task, Any], apiKey: String) extends WindStatusService :
+case class WillyWeatherWindStatusProvider(sttpBackend: SttpBackend[Task, Any], apiKey: String) extends WindStatusProvider :
   def get(beachId: BeachId): TIO[BeachNotFound, com.pureblocks.surfsup.beaches.core.Wind] =
     val request = basicRequest.response(asStringAlways)
       .get(uri"https://api.willyweather.com.au/v2/$apiKey/locations/${beachId.id}/weather.json?observational=true")
@@ -38,9 +38,8 @@ case class WillyWeatherWindStatusService(sttpBackend: SttpBackend[Task, Any], ap
       })
     either.getOrElse(InvalidResponseFromWW(json))
 
-
-object WillyWeatherWindStatusService {
-  val live: ZLayer[SttpBackend[Task, Any] & String, Any, WillyWeatherWindStatusService] = ZLayer.fromFunction((a, b) => WillyWeatherWindStatusService(a, b))
+object WillyWeatherWindStatusProvider {
+  val live: ZLayer[SttpBackend[Task, Any] & String, Any, WillyWeatherWindStatusProvider] = ZLayer.fromFunction((a, b) => WillyWeatherWindStatusProvider(a, b))
 }
 
 
