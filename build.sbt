@@ -32,6 +32,6 @@ lazy val beaches: Project = (project in file("beaches"))
     libraryDependencies ++= Seq(
       "dev.zio" %% "zio" % "2.0.0",
       "com.softwaremill.sttp.client3" %% "zio" % "3.7.4",
-      "dev.zio" %% "zio-json" % "0.3.0-RC10"
+      "dev.zio" %% "zio-json" % "0.7.3"
     )
   ).dependsOn(commons)
