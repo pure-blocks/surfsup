@@ -22,7 +22,7 @@ lazy val commons: Project = (project in file("commons"))
   .settings(
     name := "commons",
     libraryDependencies ++= Seq(
-      "dev.zio" %% "zio" % "2.0.0"
+      "dev.zio" %% "zio" % "2.1.11"
     )
   )
 lazy val beaches: Project = (project in file("beaches"))
@@ -30,7 +30,7 @@ lazy val beaches: Project = (project in file("beaches"))
   .settings(
     name := "beaches",
     libraryDependencies ++= Seq(
-      "dev.zio" %% "zio" % "2.0.0",
+      "dev.zio" %% "zio" % "2.1.11",
       "com.softwaremill.sttp.client3" %% "zio" % "3.7.4",
       "dev.zio" %% "zio-json" % "0.3.0-RC10"
     )
