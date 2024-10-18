@@ -1,6 +1,6 @@
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
-ThisBuild / scalaVersion := "3.1.3"
+ThisBuild / scalaVersion := "3.5.2"
 
 lazy val root = (project in file("."))
   .settings(
@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
 
 lazy val commonSettings = Seq(
   organization := "com.pureblocks.surfsup",
-  scalaVersion := "3.1.3"
+  scalaVersion := "3.5.2"
 )
 
 lazy val rootProject = (project in file("."))
